@@ -62,6 +62,7 @@ class Game:
         # 결과 이미지 로드
         self.perfect_image = pygame.image.load("data/images/perfect.png").convert_alpha()
         self.perfect_image = pygame.transform.scale(self.perfect_image, (148, 49))
+        self.ok_image = pygame.image.load("data/images/Ok.png")
 
         self.result_image = None
         self.result_alpha = 0
@@ -95,8 +96,10 @@ class Game:
                 for _ in range(40):
                     particle = Particle(sprite.rect.center)
                     particles.add(particle)
-                if accuracy <= 10:
+                if accuracy <= 5:
                     self.result_image = self.perfect_image
+                else:
+                    self.result_image = self.ok_image
 
                 self.result_alpha = 0
                 self.result_display_time = pygame.time.get_ticks()
