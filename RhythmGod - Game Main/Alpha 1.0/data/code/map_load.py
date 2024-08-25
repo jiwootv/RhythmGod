@@ -4,7 +4,7 @@ class Chabo_map_load:
 	def __init__(self, mapname):
 		print("성공적으로 로드")
 		# self.file_name = open(mapname+"\\Map1.json", "r")
-		self.file_path = mapname + "\\Map1.json"
+		self.file_path = mapname / "Map1.json"
 		self.json_data = self.load()
 		print(self.json_data)
 	def load(self):

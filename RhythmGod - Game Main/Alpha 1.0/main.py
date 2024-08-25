@@ -1,3 +1,6 @@
+from pathlib import Path
+# 2024-08-25 오후 2:47 기준 밑에 있는 코드가 ModuleNotFoundError 떴는데 ㅅㅂ 왜뜨는건데 (qwru0905)
+# 고침. 아니 왜 cmd 로 한게 인식이 왜 안되는건데 (qwru0905)
 import pygame
 import sys
 import data.code.map_load as MAPLOAD
@@ -6,6 +9,8 @@ import math, random
 # Pygame 초기화
 pygame.mixer.init()
 pygame.init()
+
+current_dir = Path(__file__).resolve().parent
 
 # 채보 스프라이트 코드
 class Chabo(pygame.sprite.Sprite):
@@ -60,9 +65,9 @@ class Game:
         self.is_fullscreen = False
 
         # 결과 이미지 로드
-        self.perfect_image = pygame.image.load("data/images/perfect.png").convert_alpha()
+        self.perfect_image = pygame.image.load(current_dir / "data/images/perfect.png").convert_alpha()
         self.perfect_image = pygame.transform.scale(self.perfect_image, (148, 49))
-        self.ok_image = pygame.image.load("data/images/Ok.png")
+        self.ok_image = pygame.image.load(current_dir / "data/images/Ok.png")
 
         self.result_image = None
         self.result_alpha = 0
@@ -77,7 +82,7 @@ class Game:
         ]
 
         self.chabo_rate = [[], [], [], []]
-        self.chabo_collide_sp = pygame.image.load("data\\images\\chabo_collide_rect.png")
+        self.chabo_collide_sp = pygame.image.load(current_dir / "data/images/chabo_collide_rect.png")
 
     def summon_chabo(self, type):
         rect_sprite = Chabo(type + 1)
@@ -173,7 +178,7 @@ class Game:
 
     def run(self):
         self.summon_chabo(3)
-        m = MAPLOAD.Chabo_map_load("data\\map\\animals")
+        m = MAPLOAD.Chabo_map_load(current_dir / "data/map/animals")
         m_data = m.load()
         if not m_data:  # JSON 데이터가 없는 경우 종료
             print("데이터를 불러오지 못했습니다.")
