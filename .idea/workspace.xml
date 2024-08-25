@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d446450f-91f2-4284-9c4d-305cc4f8f03d" name="변경" comment="폴더이름 변경">
-      <change beforePath="$PROJECT_DIR$/.idea/RythmGod.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RythmGod.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d446450f-91f2-4284-9c4d-305cc4f8f03d" name="변경" comment="내 쪽에서 실행이 안되는 오류 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/main.py" afterDir="false" />
     </list>
@@ -108,11 +106,20 @@
       <option name="project" value="LOCAL" />
       <updated>1717724754706</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="내 쪽에서 실행이 안되는 오류 수정">
+      <option name="closed" value="true" />
+      <created>1724565668725</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1724565668725</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="폴더이름 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="폴더이름 변경" />
+    <MESSAGE value="내 쪽에서 실행이 안되는 오류 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="내 쪽에서 실행이 안되는 오류 수정" />
   </component>
 </project>

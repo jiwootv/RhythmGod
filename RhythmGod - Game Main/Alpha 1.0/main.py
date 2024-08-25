@@ -55,6 +55,39 @@ class Particle(pygame.sprite.Sprite):
         if self.life <= 0:
             self.kill()
 
+class Button:
+    def __init__(self, x, y, width, height, color, text=''):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.color = color
+        self.text = text
+
+    def draw(self, screen, outline=None):
+        # 버튼에 외곽선이 있을 경우 그리기
+        if outline:
+            pygame.draw.rect(screen, outline, (self.x - 2, self.y - 2, self.width + 4, self.height + 4), 0)
+
+        # 버튼 그리기
+        pygame.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height), 0)
+
+        # 버튼에 텍스트가 있을 경우 텍스트 그리기
+        if self.text != '':
+            font = pygame.font.Font(None, 30)
+            text = font.render(self.text, 1, (0, 0, 0))
+            screen.blit(text, (
+                self.x + (self.width / 2 - text.get_width() / 2),
+                self.y + (self.height / 2 - text.get_height() / 2)
+            ))
+
+    def is_over(self, pos):
+        # pos는 마우스의 (x, y) 좌표
+        if self.x < pos[0] < self.x + self.width:
+            if self.y < pos[1] < self.y + self.height:
+                return True
+        return False
+
 # 리듬 게임 메인 클래스
 class Game:
     def __init__(self):
@@ -83,6 +116,7 @@ class Game:
 
         self.chabo_rate = [[], [], [], []]
         self.chabo_collide_sp = pygame.image.load(current_dir / "data/images/chabo_collide_rect.png")
+        pygame.display.set_caption("RhythmGod")
 
     def summon_chabo(self, type):
         rect_sprite = Chabo(type + 1)
@@ -176,7 +210,25 @@ class Game:
             self.screen.blit(image_copy,
                              (self.result_image_pos[0] - width // 2+200, self.result_image_pos[1] - height // 2+100))
 
+    def start_menu(self):
+        button = Button(120, 375, 400, 75, (0, 255, 0), 'START')
+
+        while True:
+            button.draw(self.screen, (0, 0, 0))
+            pygame.display.update()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if button.is_over(pygame.mouse.get_pos()):
+                        print("Button clicked!")
+                        return
+
     def run(self):
+        self.start_menu()
+        """from time import sleep
+        sleep(10)"""
         self.summon_chabo(3)
         m = MAPLOAD.Chabo_map_load(current_dir / "data/map/animals")
         m_data = m.load()
@@ -196,8 +248,11 @@ class Game:
             self.draw()
             self.event()
             pygame.display.update()
-            self.screen.fill((0))
+            self.screen.fill(0)
             self.clock.tick(60)
+            if len(all_sprites) == 0:
+                # 끝남이 너무 도배되긴 하는데, 뭐 어떻게든 되겠지
+                print("끝남")
 
 G = Game()
 G.run()
