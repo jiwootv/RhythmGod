@@ -1,4 +1,7 @@
+import json
+import os
 from pathlib import Path
+
 # 2024-08-25 오후 2:47 기준 밑에 있는 코드가 ModuleNotFoundError 떴는데 ㅅㅂ 왜뜨는건데 (qwru0905)
 # 고침. 아니 왜 cmd 로 한게 인식이 왜 안되는건데 (qwru0905)
 import pygame
@@ -212,9 +215,9 @@ class Game:
 
     def start_menu(self):
         button = Button(120, 375, 400, 75, (0, 255, 0), 'START')
+        button.draw(self.screen, (0, 0, 0))
 
         while True:
-            button.draw(self.screen, (0, 0, 0))
             pygame.display.update()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -225,12 +228,70 @@ class Game:
                         print("Button clicked!")
                         return
 
-    def run(self):
-        self.start_menu()
-        """from time import sleep
-        sleep(10)"""
+    song_file_name = ""
+    def song_select(self):
+        self.screen.fill((0, 0, 0))
+        file_list = os.listdir(current_dir / "data/map")
+        [file for file in file_list if file.endswith('.json')]
+        print(file_list)
+        song_name_list = []
+        for file_name in file_list:
+            with open(current_dir / "data/map" / file_name, "r", encoding="utf-8") as file:
+                song_name_list.append(json.load(file)["map_name"])
+
+        print(song_name_list)
+        # self.screen = pygame.display.set_mode((640, 480))
+        button1 = Button(300, 100, 300, 75, (255, 255, 255), '[song1]')
+        button2 = Button(300, 200, 300, 75, (255, 255, 255), '[song2]')
+        button3 = Button(300, 300, 300, 75, (255, 255, 255), '[song3]')
+        for i in range(3):
+            if i < len(song_name_list):
+                print(f"{i + 1}. {song_name_list[i]}")
+                if i % 3 == 0:
+                    button1.text = song_name_list[i]
+                    button1.draw(self.screen, (0, 0, 0))
+                if i % 3 == 1:
+                    button2.text = song_name_list[i]
+                    button2.draw(self.screen, (0, 0, 0))
+                if i % 3 == 2:
+                    button3.text = song_name_list[i]
+                    button3.draw(self.screen, (0, 0, 0))
+        while True:
+            pygame.display.update()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if button1.is_over(pygame.mouse.get_pos()):
+                        print("Button1 clicked!")
+                        for file_name in file_list:
+                            with open(current_dir / "data/map" / file_name, "r", encoding="utf-8") as file:
+                                if button1.text == json.load(file)["map_name"]:
+                                    self.song_file_name = file_name
+                                    break
+                        return
+                    elif button2.is_over(pygame.mouse.get_pos()):
+                        print("Button2 clicked!")
+                        for file_name in file_list:
+                            with open(current_dir / "data/map" / file_name, "r", encoding="utf-8") as file:
+                                if button2.text == json.load(file)["map_name"]:
+                                    self.song_file_name = file_name
+                                    break
+                        return
+                    elif button3.is_over(pygame.mouse.get_pos()):
+                        print("Button3 clicked!")
+                        for file_name in file_list:
+                            with open(current_dir / "data/map" / file_name, "r", encoding="utf-8") as file:
+                                if button3.text == json.load(file)["map_name"]:
+                                    self.song_file_name = file_name
+                                    break
+                        return
+
+
+    def game_start(self):
         self.summon_chabo(3)
-        m = MAPLOAD.Chabo_map_load(current_dir / "data/map/animals")
+        m = MAPLOAD.Chabo_map_load(current_dir / "data/map" / self.song_file_name)
         m_data = m.load()
         if not m_data:  # JSON 데이터가 없는 경우 종료
             print("데이터를 불러오지 못했습니다.")
@@ -253,6 +314,11 @@ class Game:
             if len(all_sprites) == 0:
                 # 끝남이 너무 도배되긴 하는데, 뭐 어떻게든 되겠지
                 print("끝남")
+
+    def run(self):
+        self.start_menu()
+        self.song_select()
+        self.game_start()
 
 G = Game()
 G.run()
