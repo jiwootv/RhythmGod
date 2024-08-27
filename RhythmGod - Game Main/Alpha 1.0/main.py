@@ -17,13 +17,14 @@ current_dir = Path(__file__).resolve().parent
 
 # 채보 스프라이트 코드
 class Chabo(pygame.sprite.Sprite):
-    def __init__(self, type):
+    def __init__(self, type, speed):
         super().__init__()
         self.image = pygame.Surface((50, 20))
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
         self.rect.topleft = (75 * (type - 1), 0)
         self.moving_down = False
+        self.speed = speed
 
     def GetDown(self):
         self.moving_down = True
@@ -32,7 +33,7 @@ class Chabo(pygame.sprite.Sprite):
         if self.rect.top > 470:
             self.kill()
         if self.moving_down:
-            self.rect.y += 2.5  # 스프라이트가 내려가는 속도 조절
+            self.rect.y += self.speed  # 스프라이트가 내려가는 속도 조절
 
     def get(self):
         return self.rect
@@ -121,8 +122,8 @@ class Game:
         self.chabo_collide_sp = pygame.image.load(current_dir / "data/images/chabo_collide_rect.png")
         pygame.display.set_caption("RhythmGod")
 
-    def summon_chabo(self, type):
-        rect_sprite = Chabo(type + 1)
+    def summon_chabo(self, type, speed):
+        rect_sprite = Chabo(type + 1, speed)
         # noinspection PyTypeChecker
         all_sprites.add(rect_sprite)
         rect_sprite.GetDown()
@@ -232,7 +233,7 @@ class Game:
     def song_select(self):
         self.screen.fill((0, 0, 0))
         file_list = os.listdir(current_dir / "data/map")
-        [file for file in file_list if file.endswith('.json')]
+        file_list = [file for file in file_list if file.endswith('.json') or file.endswith('.rgsf')]   # .rgsf는 rhythm god song file의 줄인 말임. zip 파일 형식으로 파일을 저장할 예정
         print(file_list)
         song_name_list = []
         for file_name in file_list:
@@ -240,7 +241,7 @@ class Game:
                 song_name_list.append(json.load(file)["map_name"])
 
         print(song_name_list)
-        # self.screen = pygame.display.set_mode((640, 480))
+        # self.screen = pygame.display.set_mode((640, 480)) (확인용)
         button1 = Button(300, 100, 300, 75, (255, 255, 255), '[song1]')
         button2 = Button(300, 200, 300, 75, (255, 255, 255), '[song2]')
         button3 = Button(300, 300, 300, 75, (255, 255, 255), '[song3]')
@@ -290,7 +291,6 @@ class Game:
 
 
     def game_start(self):
-        self.summon_chabo(3)
         m = MAPLOAD.Chabo_map_load(current_dir / "data/map" / self.song_file_name)
         m_data = m.load()
         if not m_data:  # JSON 데이터가 없는 경우 종료
@@ -301,10 +301,16 @@ class Game:
         timer = 0
         while True:
             timer += 1
-            for i in m_data["chabo"]:
-                if str(timer) == str(i):
-                    for k in m_data["chabo"][i]:
-                        self.summon_chabo(k - 1)
+            if not "version" in m_data:
+                for i in m_data["chabo"]:
+                    if str(timer) == str(i):
+                        for k in m_data["chabo"][i]:
+                            self.summon_chabo(k - 1, 2.5)
+            elif m_data["version"] == 0.1:
+                for i in m_data["chabo"]:
+                    if str(timer) == str(i):
+                        for k in m_data["chabo"][i]:
+                            self.summon_chabo(k - 1, m_data["note_speed"])
 
             self.draw()
             self.event()
