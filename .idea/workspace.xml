@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d446450f-91f2-4284-9c4d-305cc4f8f03d" name="변경" comment="시작 화면과 끝 로직 작성">
-      <change afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/code/make_askl.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/asklasklasklaskl....json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/감지되면 안되는 파일.FUCK" afterDir="false" />
+    <list default="true" id="d446450f-91f2-4284-9c4d-305cc4f8f03d" name="변경" comment="감지되면 안되는 파일 감지되는 오류 수정,&#10;속도를 파일에서 바꿀 수 있게 만듬">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/asklasklasklaskl....json" beforeDir="false" afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/asklasklasklaskl....json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +23,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -154,13 +153,29 @@
       <option name="project" value="LOCAL" />
       <updated>1724570906598</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="감지되면 안되는 파일 감지되는 오류 수정,&#10;속도를 파일에서 바꿀 수 있게 만듬">
+      <option name="closed" value="true" />
+      <created>1724746170463</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1724746170463</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="폴더이름 변경" />
     <MESSAGE value="내 쪽에서 실행이 안되는 오류 수정" />
     <MESSAGE value="시작 화면과 끝 로직 작성" />
-    <option name="LAST_COMMIT_MESSAGE" value="시작 화면과 끝 로직 작성" />
+    <MESSAGE value="감지되면 안되는 파일 감지되는 오류 수정,&#10;속도를 파일에서 바꿀 수 있게 만듬" />
+    <option name="LAST_COMMIT_MESSAGE" value="감지되면 안되는 파일 감지되는 오류 수정,&#10;속도를 파일에서 바꿀 수 있게 만듬" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="self.chabo_collide_sp" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -9,9 +9,16 @@ import sys
 import data.code.map_load as MAPLOAD
 import math, random
 
+# 460일 때 perfect임
+
 # Pygame 초기화
 pygame.mixer.init()
 pygame.init()
+
+# clock 설정
+clock = pygame.time.Clock()
+# 프레임
+delta_time = 0
 
 current_dir = Path(__file__).resolve().parent
 
@@ -25,6 +32,13 @@ class Chabo(pygame.sprite.Sprite):
         self.rect.topleft = (75 * (type - 1), 0)
         self.moving_down = False
         self.speed = speed
+        self.type = type
+        # 눌러야 하는 시간
+        # FIXME: tlqkf 어떻게 하든 간에 이 코드가 문제야.
+        # (타이밍 수정)
+        self.note_time = pygame.time.get_ticks() + (460 / speed) * 1000
+        #print(pygame.time.get_ticks())
+        #print((460 / speed)*1000)
 
     def GetDown(self):
         self.moving_down = True
@@ -33,7 +47,8 @@ class Chabo(pygame.sprite.Sprite):
         if self.rect.top > 470:
             self.kill()
         if self.moving_down:
-            self.rect.y += self.speed  # 스프라이트가 내려가는 속도 조절
+            global delta_time
+            self.rect.y += self.speed * delta_time/1000  # 스프라이트가 내려가는 속도 조절
 
     def get(self):
         return self.rect
@@ -97,8 +112,6 @@ class Game:
     def __init__(self):
         # 화면 설정
         self.screen = pygame.display.set_mode((640, 480))
-        # clock 설정
-        self.clock = pygame.time.Clock()
         self.is_fullscreen = False
 
         # 결과 이미지 로드
@@ -122,6 +135,10 @@ class Game:
         self.chabo_collide_sp = pygame.image.load(current_dir / "data/images/chabo_collide_rect.png")
         pygame.display.set_caption("RhythmGod")
 
+        # perfect +-33.33ms(2프레임), ok +-50.00ms(3프레임)
+        self.perfect_judge = 33.33
+        self.ok_judge = 50.00
+
     def summon_chabo(self, type, speed):
         rect_sprite = Chabo(type + 1, speed)
         # noinspection PyTypeChecker
@@ -131,6 +148,7 @@ class Game:
 
     def check_collision(self, type):
         for sprite in all_sprites:
+            """
             if sprite.rect.colliderect(self.chabo_bg_rects_white[type]):
                 accuracy = 460 - sprite.rect.y
                 print(len(all_sprites))
@@ -140,6 +158,28 @@ class Game:
                     particle = Particle(sprite.rect.center)
                     particles.add(particle)
                 if accuracy <= 5:
+                    self.result_image = self.perfect_image
+                else:
+                    self.result_image = self.ok_image
+
+                self.result_alpha = 0
+                self.result_display_time = pygame.time.get_ticks()
+
+                return True
+            """
+            if sprite.type != type:
+                continue
+
+            accuracy = sprite.note_time - pygame.time.get_ticks()
+            print(sprite.note_time)
+            print(pygame.time.get_ticks())
+            print(accuracy)
+            if -self.ok_judge <= accuracy <= self.ok_judge:
+                sprite.kill()
+                for _ in range(40):
+                    particle = Particle(sprite.rect.center)
+                    particles.add(particle)
+                if -self.perfect_judge <= accuracy <= self.perfect_judge:
                     self.result_image = self.perfect_image
                 else:
                     self.result_image = self.ok_image
@@ -299,13 +339,15 @@ class Game:
             sys.exit()
 
         timer = 0
+        global delta_time, start_time
         while True:
+            delta_time = clock.tick(60)
             timer += 1
             if not "version" in m_data:
                 for i in m_data["chabo"]:
                     if str(timer) == str(i):
                         for k in m_data["chabo"][i]:
-                            self.summon_chabo(k - 1, 2.5)
+                            self.summon_chabo(k - 1, 2.5 * 60)
             elif m_data["version"] == 0.1:
                 for i in m_data["chabo"]:
                     if str(timer) == str(i):
@@ -316,10 +358,11 @@ class Game:
             self.event()
             pygame.display.update()
             self.screen.fill(0)
-            self.clock.tick(60)
             if len(all_sprites) == 0:
                 # 끝남이 너무 도배되긴 하는데, 뭐 어떻게든 되겠지
-                print("끝남")
+                # 나 참고로 여기 주석 할 때 실수호 // 이렇게 함
+                #print("끝남")
+                continue
 
     def run(self):
         self.start_menu()
