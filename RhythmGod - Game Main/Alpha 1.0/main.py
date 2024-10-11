@@ -143,6 +143,9 @@ class Game:
         # perfect +-50.00ms(3프레임), ok +-100.00ms(6프레임)
         self.perfect_judge = 50.00
         self.ok_judge = 100.00
+        
+        self.perfect_count = 0
+        self.ok_count = 0
 
     def summon_chabo(self, type, speed):
         rect_sprite = Chabo(type + 1, speed)
@@ -186,8 +189,10 @@ class Game:
                     particles.add(particle)
                 if -self.perfect_judge <= accuracy <= self.perfect_judge:
                     self.result_image = self.perfect_image
+                    self.perfect_count += 1
                 else:
                     self.result_image = self.ok_image
+                    self.ok_count += 1
 
                 self.result_alpha = 0
                 self.result_display_time = pygame.time.get_ticks()
@@ -364,14 +369,26 @@ class Game:
             self.clock.tick(60)
             if len(all_sprites) == 0:
                 # 끝남이 너무 도배되긴 하는데, 뭐 어떻게든 되겠지
-                # 나 참고로 여기 주석 할 때 실수호 // 이렇게 함
-                #print("끝남")
-                continue
+                # 나 참고로 여기 주석 할 때 실수로 // 이렇게 함
+                print("끝남")
+                return [self.perfect_count, self.ok_count]
 
     def run(self):
         self.start_menu()
-        self.song_select()
-        self.game_start()
+        while True:
+            self.song_select()
+            result = self.game_start()
+            self.result(result)
+            self.reset()
+
+    def result(self, result):
+        print("perfect: " + str(result[0]))
+        print("ok: " + str(result[1]))
+
+    def reset(self):
+        self.perfect_count = 0
+        self.ok_count = 0
+
 
 G = Game()
 G.run()
