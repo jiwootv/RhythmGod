@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d446450f-91f2-4284-9c4d-305cc4f8f03d" name="변경" comment="노트 판정 위치에서 타이밍으로 수정">
+    <list default="true" id="d446450f-91f2-4284-9c4d-305cc4f8f03d" name="변경" comment="설명 참고&#10;결과 로직 구현, 게임을 끄지 않고도 다른 맵을 플레이 할 수 있게 반복">
+      <change afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/images/leftButtonBasic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/images/rightButtonBasic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/askl2.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/askl3.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/askl4.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/asklasklasklaskl....json" beforeDir="false" afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/asklasklasklaskl....json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/code/make_askl.py" beforeDir="false" afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/code/make_askl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/asklasklasklaskl....json" beforeDir="false" afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/data/map/askl.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +31,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/RhythmGod - Game Main/Alpha 1.0/main.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -32,7 +41,9 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2hPrQCHFHi6BbJxUCeMRvTpk8au" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -51,11 +62,12 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/chris/my_python/RhythmGod&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\chris\my_python\RhythmGod\RhythmGod - Game Main\Alpha 1.0\data\images" />
       <recent name="D:\chris\my_python\RhythmGod\RhythmGod - Game Main\Alpha 1.0\data\map" />
       <recent name="C:\Users\PC\PycharmProjects\RythmGod\RythmGod - Game Main\Alpha 1.0\data\images" />
       <recent name="C:\Users\PC\PycharmProjects\RythmGod\RythmGod - Game Main\Alpha 1.0\data" />
@@ -72,6 +84,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -107,6 +120,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.개쩌는거" />
+      <item itemvalue="Python.make_askl" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.make_askl" />
@@ -185,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728641134798</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="설명 참고&#10;결과 로직 구현, 게임을 끄지 않고도 다른 맵을 플레이 할 수 있게 반복">
+      <option name="closed" value="true" />
+      <created>1728646765543</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1728646765543</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -207,7 +232,8 @@
     <MESSAGE value="노트 판정 위치에서 박자로" />
     <MESSAGE value="코드 바로 복잡해지게 만들어버리기&#10;타이밍을 픽셀이 아닌 시간으로 만들려고 했는데&#10;생각보다 어렵네" />
     <MESSAGE value="노트 판정 위치에서 타이밍으로 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="노트 판정 위치에서 타이밍으로 수정" />
+    <MESSAGE value="설명 참고&#10;결과 로직 구현, 게임을 끄지 않고도 다른 맵을 플레이 할 수 있게 반복" />
+    <option name="LAST_COMMIT_MESSAGE" value="설명 참고&#10;결과 로직 구현, 게임을 끄지 않고도 다른 맵을 플레이 할 수 있게 반복" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

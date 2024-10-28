@@ -2,7 +2,9 @@ import json
 
 # 원래 주어진 JSON 구조
 data = {
-    "map_name": "askl",
+    "version": 0.1,
+    "note_speed": 600,
+    "map_name": "askl4",
     "chabo": {}
 }
 
@@ -15,7 +17,7 @@ for i in range(20):
         "300": [3],
         "400": [4],
     }.items():
-        data["chabo"][str(counter)] = value
+        data["chabo"][str(counter*2)] = value
         counter += 1
 
 # JSON 형식으로 변환
